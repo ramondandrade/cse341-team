@@ -49,13 +49,13 @@ const getCharacterById = async (req, res) => {
 const getCharactersByUserId = async (req, res) => {
 
   try {
-    const { id } = req.params;
+    const id  = req.params.id;
     
     if (!id) {
       return res.status(400).json({ message: 'User ID is required' });
     }
 
-    const characters = await Character.findByUserId(id);
+    const characters = await Character.find({ userId: id });
     
     if (characters.length === 0) {
       return res.status(404).json({ message: 'No characters found for this user' });
