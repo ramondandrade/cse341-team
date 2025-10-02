@@ -4,7 +4,7 @@ const ObjectId = require("mongodb").ObjectId;
 const getAllUsers = async (req, res) => {
   //#swagger.tags=["players"]
   try {
-    const result = await mongodb.getDatabase().db().collection("users").find();
+    const result = await mongodb.getDatabase().db().collection("players").find();
     result.toArray().then((users) => {
       res.setHeader("Content-Type", "application/json");
       res.status(200).json(users);
@@ -18,7 +18,7 @@ const getSingleUser = async (req, res) => {
   //#swagger.tags=["players"]
   try {
     const userId = new ObjectId(req.params.id);
-    const result = await mongodb.getDatabase().db().collection("users").find({ _id: userId });
+    const result = await mongodb.getDatabase().db().collection("players").find({ _id: userId });
     result.toArray().then((users) => {
       res.setHeader("Content-Type", "application/json");
       res.status(200).json(users[0]);
@@ -56,7 +56,7 @@ const createUser = async (req, res) => {
       createdAt: Date(timestamp),
       characters: req.body.characters
     };
-    const response = await mongodb.getDatabase().db().collection("users").insertOne(user);
+    const response = await mongodb.getDatabase().db().collection("players").insertOne(user);
     if (response.acknowledged) {
       res.status(204).send();
     } else {
@@ -69,7 +69,7 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   /* #swagger.tags=["players"]
-  #swagger.description="Please change only your own data when using this route. \nTo use this route copy and paste your username, profileUrl, and characters from the GET /players/, and make the desired changes. \nOnly change your profileUrl if it has changed." 
+  #swagger.description="Please change only your own data when using this route. To use this route copy and paste your username, profileUrl, and characters from the GET /players/, and make the desired changes. Only change your profileUrl if it has changed." 
   #swagger.parameters["body"] = {
     in: "body",
     '@schema': {
@@ -92,7 +92,7 @@ const updateUser = async (req, res) => {
     const existingUser = await mongodb
       .getDatabase()
       .db()
-      .collection("users")
+      .collection("players")
       .findOne({ _id: userId });
     const user = {
       username: req.body.username,
@@ -103,7 +103,7 @@ const updateUser = async (req, res) => {
     const response = await mongodb
       .getDatabase()
       .db()
-      .collection("users")
+      .collection("players")
       .replaceOne({ _id: userId }, user);
     if (response.modifiedCount > 0) {
       res.status(204).send();
@@ -123,7 +123,7 @@ const deleteUser = async (req, res) => {
     const response = await mongodb
       .getDatabase()
       .db()
-      .collection("users")
+      .collection("players")
       .deleteOne({ _id: userId });
     if (response.deletedCount > 0) {
       res.status(204).send();

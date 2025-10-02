@@ -12,6 +12,19 @@
     "http"
   ],
   "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Hello World"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/character/": {
       "get": {
         "tags": [
@@ -216,6 +229,9 @@
           "204": {
             "description": "No Content"
           },
+          "412": {
+            "description": "Precondition Failed"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -249,7 +265,7 @@
         "tags": [
           "players"
         ],
-        "description": "Please change only your own data when using this route. \\nTo use this route copy and paste your username, profileUrl, and characters from the GET /players/, and make the desired changes. \\nOnly change your profileUrl if it has changed.",
+        "description": "Please change only your own data when using this route. To use this route copy and paste your username, profileUrl, and characters from the GET /players/, and make the desired changes. Only change your profileUrl if it has changed.",
         "parameters": [
           {
             "name": "id",
@@ -289,6 +305,9 @@
           "204": {
             "description": "No Content"
           },
+          "412": {
+            "description": "Precondition Failed"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -313,6 +332,16 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api-docs": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
           }
         }
       }
