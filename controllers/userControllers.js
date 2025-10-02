@@ -2,7 +2,7 @@ const mongodb = require("../data/db");
 const ObjectId = require("mongodb").ObjectId;
 
 const getAllUsers = async (req, res) => {
-  //#swagger.tags=["players"]
+  //#swagger.tags=["Players"]
   try {
     const result = await mongodb.getDatabase().db().collection("players").find();
     result.toArray().then((users) => {
@@ -15,7 +15,7 @@ const getAllUsers = async (req, res) => {
 };
 
 const getSingleUser = async (req, res) => {
-  //#swagger.tags=["players"]
+  //#swagger.tags=["Players"]
   try {
     const userId = new ObjectId(req.params.id);
     const result = await mongodb.getDatabase().db().collection("players").find({ _id: userId });
@@ -29,7 +29,7 @@ const getSingleUser = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  /* #swagger.tags=["players"]
+  /* #swagger.tags=["Players"]
   #swagger.description="Creating a user here is not recommended. If you want to create a user, please go to /login"
   #swagger.parameters["body"] = {
     in: "body",
@@ -68,7 +68,7 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  /* #swagger.tags=["players"]
+  /* #swagger.tags=["Players"]
   #swagger.description="Please change only your own data when using this route. To use this route copy and paste your username, profileUrl, and characters from the GET /players/, and make the desired changes. Only change your profileUrl if it has changed." 
   #swagger.parameters["body"] = {
     in: "body",
@@ -116,7 +116,7 @@ const updateUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  //#swagger.tags=["players"]
+  //#swagger.tags=["Players"]
   //#swagger.description="Please delete only your own user data when using this route"
   try {
     const userId = new ObjectId(req.params.id);
