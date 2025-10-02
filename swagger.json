@@ -45,6 +45,65 @@
           "Characters"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "userId": {
+                  "example": "any"
+                },
+                "class": {
+                  "example": "any"
+                },
+                "race": {
+                  "example": "any"
+                },
+                "level": {
+                  "example": 1
+                },
+                "hitPoints": {
+                  "example": 1
+                },
+                "armorClass": {
+                  "example": 1
+                },
+                "strength": {
+                  "example": 1
+                },
+                "dexterity": {
+                  "example": 1
+                },
+                "constitution": {
+                  "example": 1
+                },
+                "intelligence": {
+                  "example": 1
+                },
+                "wisdom": {
+                  "example": 1
+                },
+                "charisma": {
+                  "example": 1
+                },
+                "background": {
+                  "example": "any"
+                },
+                "alignment": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -158,6 +217,63 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "userId": {
+                  "example": "any"
+                },
+                "class": {
+                  "example": "any"
+                },
+                "race": {
+                  "example": "any"
+                },
+                "level": {
+                  "example": 1
+                },
+                "hitPoints": {
+                  "example": 1
+                },
+                "armorClass": {
+                  "example": 1
+                },
+                "strength": {
+                  "example": 1
+                },
+                "dexterity": {
+                  "example": 1
+                },
+                "constitution": {
+                  "example": 1
+                },
+                "intelligence": {
+                  "example": 1
+                },
+                "wisdom": {
+                  "example": 1
+                },
+                "charisma": {
+                  "example": 1
+                },
+                "background": {
+                  "example": "any"
+                },
+                "alignment": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -179,7 +295,7 @@
     "/player/": {
       "get": {
         "tags": [
-          "players"
+          "Players"
         ],
         "description": "",
         "produces": [
@@ -193,7 +309,7 @@
       },
       "post": {
         "tags": [
-          "players"
+          "Players"
         ],
         "description": "Creating a user here is not recommended. If you want to create a user, please go to /login",
         "parameters": [
@@ -241,7 +357,7 @@
     "/player/{id}": {
       "get": {
         "tags": [
-          "players"
+          "Players"
         ],
         "description": "",
         "produces": [
@@ -263,7 +379,7 @@
       },
       "put": {
         "tags": [
-          "players"
+          "Players"
         ],
         "description": "Please change only your own data when using this route. To use this route copy and paste your username, profileUrl, and characters from the GET /players/, and make the desired changes. Only change your profileUrl if it has changed.",
         "parameters": [
@@ -315,7 +431,7 @@
       },
       "delete": {
         "tags": [
-          "players"
+          "Players"
         ],
         "description": "Please delete only your own user data when using this route",
         "parameters": [

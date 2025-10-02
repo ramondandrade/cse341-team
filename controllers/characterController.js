@@ -74,7 +74,63 @@ const getCharactersByUserId = async (req, res) => {
   }
 };// Create a new character
 const createCharacter = async (req, res) => {
-  //#swagger.tags=["Characters"]
+  /* #swagger.tags=["Characters"]
+  #swagger.parameters["body"] = {
+    in: "body",
+    '@schema': {
+      "type": "object",
+      "properties": {
+        "name": {
+          "example": "any"
+        },
+        "userId": {
+          "example": "any"
+        },
+        "class": {
+          "example": "any"
+        },
+        "race": {
+          "example": "any"
+        },
+        "level": {
+          "example": 1
+        },
+        "hitPoints": {
+          "example": 1
+        },
+        "armorClass": {
+          "example": 1
+        },
+        "strength": {
+          "example": 1
+        },
+        "dexterity": {
+          "example": 1
+        },
+        "constitution": {
+          "example": 1
+        },
+        "intelligence": {
+          "example": 1
+        },
+        "wisdom": {
+          "example": 1
+        },
+        "charisma": {
+          "example": 1
+        },
+        "background": {
+          "example": "any"
+        },
+        "alignment": {
+          "example": "any"
+        },
+        "description": {
+          "example": "any"
+        }
+      }
+    }
+  } */
  
   try {
 
@@ -106,8 +162,63 @@ const createCharacter = async (req, res) => {
 
 // Update character by ID
 const updateCharacter = async (req, res) => {
-  //#swagger.tags=["Characters"]
-  
+  /* #swagger.tags=["Characters"]
+  #swagger.parameters["body"] = {
+    in: "body",
+    '@schema': {
+      "type": "object",
+      "properties": {
+        "name": {
+          "example": "any"
+        },
+        "userId": {
+          "example": "any"
+        },
+        "class": {
+          "example": "any"
+        },
+        "race": {
+          "example": "any"
+        },
+        "level": {
+          "example": 1
+        },
+        "hitPoints": {
+          "example": 1
+        },
+        "armorClass": {
+          "example": 1
+        },
+        "strength": {
+          "example": 1
+        },
+        "dexterity": {
+          "example": 1
+        },
+        "constitution": {
+          "example": 1
+        },
+        "intelligence": {
+          "example": 1
+        },
+        "wisdom": {
+          "example": 1
+        },
+        "charisma": {
+          "example": 1
+        },
+        "background": {
+          "example": "any"
+        },
+        "alignment": {
+          "example": "any"
+        },
+        "description": {
+          "example": "any"
+        }
+      }
+    }
+  } */
   try {
     const { char_id } = req.params;
     const { name, userId, class: characterClass, race, level, hitPoints, armorClass, strength, dexterity, constitution, intelligence, wisdom, charisma, background, alignment, description } = req.body;
