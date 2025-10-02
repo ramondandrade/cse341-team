@@ -3,6 +3,7 @@ const { validationResult } = require('express-validator');
 
 // Get all characters
 const getAllCharacters = async (req, res) => {
+  //#swagger.tags=["Characters"]
 
   try {
     const characters = await Character.find({});
@@ -18,6 +19,7 @@ const getAllCharacters = async (req, res) => {
 
 // Get character by ID
 const getCharacterById = async (req, res) => {
+  //#swagger.tags=["Characters"]
 
   try {
     const { id } = req.params;
@@ -47,6 +49,7 @@ const getCharacterById = async (req, res) => {
 
 // Get characters by user ID
 const getCharactersByUserId = async (req, res) => {
+  //#swagger.tags=["Characters"]
 
   try {
     const id  = req.params.id;
@@ -71,6 +74,7 @@ const getCharactersByUserId = async (req, res) => {
   }
 };// Create a new character
 const createCharacter = async (req, res) => {
+  //#swagger.tags=["Characters"]
  
   try {
 
@@ -102,6 +106,7 @@ const createCharacter = async (req, res) => {
 
 // Update character by ID
 const updateCharacter = async (req, res) => {
+  //#swagger.tags=["Characters"]
   
   try {
     const { char_id } = req.params;
@@ -166,6 +171,7 @@ const updateCharacter = async (req, res) => {
 
 // Delete character by ID
 const deleteCharacter = async (req, res) => {
+  //#swagger.tags=["Characters"]
  
   try {
     const { id } = req.params;
