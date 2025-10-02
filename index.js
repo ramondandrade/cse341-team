@@ -6,6 +6,7 @@ const cors = require('cors');
 const app = express();
 require('dotenv').config();
 const PORT = process.env.PORT || 8080;
+const mongodb = require("./data/db");
 const db = require('./models');
 
 /*
@@ -78,6 +79,12 @@ process.on('uncaughtException', (err, origin) => {
   console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+mongodb.initDb((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    app.listen(PORT, () => {
+      console.log(`Web Server is listening at port ${PORT}`);
+    });
+  }
 });
