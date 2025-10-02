@@ -1,9 +1,9 @@
 const Character = require('../models/Character');
+const { validationResult } = require('express-validator');
 
 // Get all characters
 const getAllCharacters = async (req, res) => {
-  //#swagger.tags=["Characters"]
- 
+
   try {
     const characters = await Character.find({});
     res.status(200).json(characters);
@@ -18,8 +18,7 @@ const getAllCharacters = async (req, res) => {
 
 // Get character by ID
 const getCharacterById = async (req, res) => {
-  //#swagger.tags=["Characters"]
-  
+
   try {
     const { id } = req.params;
     
@@ -36,7 +35,7 @@ const getCharacterById = async (req, res) => {
     res.status(200).json(character);
   } catch (error) {
     console.error('Error fetching character:', error);
-    if (error.name === 'CastError') {
+    if (error.message.includes('Invalid ObjectId')) {
       return res.status(400).json({ message: 'Invalid character ID format' });
     }
     res.status(500).json({
@@ -48,8 +47,7 @@ const getCharacterById = async (req, res) => {
 
 // Get characters by user ID
 const getCharactersByUserId = async (req, res) => {
-  //#swagger.tags=["Characters"]
- 
+
   try {
     const { id } = req.params;
     
@@ -57,7 +55,7 @@ const getCharactersByUserId = async (req, res) => {
       return res.status(400).json({ message: 'User ID is required' });
     }
 
-    const characters = await Character.find({ userId: id });
+    const characters = await Character.findByUserId(id);
     
     if (characters.length === 0) {
       return res.status(404).json({ message: 'No characters found for this user' });
@@ -71,18 +69,15 @@ const getCharactersByUserId = async (req, res) => {
       error: error.message
     });
   }
-};
-
-// Create a new character
+};// Create a new character
 const createCharacter = async (req, res) => {
-  //#swagger.tags=["Characters"]
  
   try {
 
-    const characterData = req.body;
+    const { name, userId, class: characterClass, race, level, hitPoints, armorClass, strength, dexterity, constitution, intelligence, wisdom, charisma, background, alignment, description } = req.body;
     
     // Create new character
-    const newCharacter = new Character(characterData);
+    const newCharacter = new Character({ name, userId, class: characterClass, race, level, hitPoints, armorClass, strength, dexterity, constitution, intelligence, wisdom, charisma, background, alignment, description });
     const savedCharacter = await newCharacter.save();
 
     res.status(201).json({
@@ -107,30 +102,38 @@ const createCharacter = async (req, res) => {
 
 // Update character by ID
 const updateCharacter = async (req, res) => {
-  //#swagger.tags=["Characters"]
   
   try {
     const { char_id } = req.params;
-    const updateData = req.body;
+    const { name, userId, class: characterClass, race, level, hitPoints, armorClass, strength, dexterity, constitution, intelligence, wisdom, charisma, background, alignment, description } = req.body;
+
+    const updateData = {
+      name,
+      userId,
+      class: characterClass,
+      race,
+      level,
+      hitPoints,
+      armorClass,
+      strength,
+      dexterity,
+      constitution,
+      intelligence,
+      wisdom,
+      charisma,
+      background,
+      alignment,
+      description
+    };
     
     if (!char_id) {
       return res.status(400).json({ message: 'Character ID is required' });
-    }
-
-    // Check for validation errors
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        message: 'Validation failed',
-        errors: errors.array()
-      });
     }
 
     const updatedCharacter = await Character.findByIdAndUpdate(
       char_id,
       updateData,
       { 
-        new: true, // Return the updated document
         runValidators: true // Run model validations
       }
     );
@@ -145,14 +148,13 @@ const updateCharacter = async (req, res) => {
     });
   } catch (error) {
     console.error('Error updating character:', error);
-    if (error.name === 'CastError') {
+    if (error.message.includes('Invalid ObjectId')) {
       return res.status(400).json({ message: 'Invalid character ID format' });
     }
-    if (error.name === 'ValidationError') {
-      const validationErrors = Object.values(error.errors).map(err => err.message);
+    if (error.message.includes('Validation failed')) {
       return res.status(400).json({
         message: 'Validation failed',
-        errors: validationErrors
+        error: error.message
       });
     }
     res.status(500).json({
@@ -164,7 +166,6 @@ const updateCharacter = async (req, res) => {
 
 // Delete character by ID
 const deleteCharacter = async (req, res) => {
-  //#swagger.tags=["Characters"]
  
   try {
     const { id } = req.params;
@@ -185,7 +186,7 @@ const deleteCharacter = async (req, res) => {
     });
   } catch (error) {
     console.error('Error deleting character:', error);
-    if (error.name === 'CastError') {
+    if (error.message.includes('Invalid ObjectId')) {
       return res.status(400).json({ message: 'Invalid character ID format' });
     }
     res.status(500).json({
