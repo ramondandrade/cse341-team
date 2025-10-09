@@ -17,7 +17,7 @@ const getAllItems = async (req, res) => {
 const getItemsByCharacterId = async (req, res) => {
   //#swagger.tags=["Inventory"]
   try {
-    const char_id  = req.params.id;
+    const char_id  = req.params.characterId;
     
     if (!char_id) {
       return res.status(400).json({ message: "Character ID is required" });
