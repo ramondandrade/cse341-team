@@ -1,22 +1,16 @@
 const router = require('express').Router();
-
-// Import route modules
-const characterRoutes = require('./characterRoutes');
-
-router.get("/", (req, res) => {
-  //#swagger.tags=["Hello World"]
-  try {
-    res.send("<p>Hello World</p>");
-  } catch (error) {
-    console.error(error);
-  }
-});
+const passport = require('passport');
 
 // Use routes
-router.use('/character', characterRoutes);
-
+router.use('/character', require('./characterRoutes'));
 router.use("/player", require("./userRoutes"));
-
+router.use("/quest", require("./questLogRoutes"));
 router.use("/", require("./swagger"));
+router.use('/auth', passport.authenticate('github')); 
+router.use('/logout', (req, res) => {
+  req.logout(() => {
+    res.redirect('/');
+  });
+});
 
 module.exports = router;

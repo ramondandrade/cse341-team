@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 8080;
 const mongodb = require("./data/db");
 const db = require('./models');
 
-/*
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -41,14 +41,13 @@ passport.use(new GitHubStrategy({
 app.get('/auth/github', passport.authenticate('github', { scope: ['user:profile'] }));
 app.get('/auth/github/callback',
   passport.authenticate('github', { 
-    failureRedirect: '/api-docs', session: false }),
+    failureRedirect: '/', session: false }),
   (req, res) => {
     req.session.user = req.user;
     // Successful authentication
     res.redirect('/');
   }
 );
-*/
 
 app
   .use(cors())
