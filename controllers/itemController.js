@@ -17,13 +17,17 @@ const getAllItems = async (req, res) => {
 const getItemsByCharacterId = async (req, res) => {
   //#swagger.tags=["Inventory"]
   try {
-    const id  = req.params.characterId;
+    const id = new ObjectId(req.params.characterId);
     
     if (!id) {
       return res.status(400).json({ message: "Character ID is required" });
     }
 
     const items = await mongodb.getDatabase().db().collection("inventory").find({ characterId: id });
+    result.toArray().then((items) => {
+      res.setHeader("Content-Type", "application/json");
+      res.status(200).json(items);
+    });
     
     if (items.length === 0) {
       return res.status(404).json({ message: "No items found for this character" });
