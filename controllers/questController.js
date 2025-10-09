@@ -89,11 +89,29 @@ const createQuest = async (req, res) => {
       in: 'body',
       description: 'Quest data',
       required: true,
-      schema: { $ref: '#/definitions/QuestInput' }
+       '@schema': {
+        type: 'object',
+        properties: {
+          name: { type: 'string', required: true, example: 'Aragorn' },
+          userId: { type: 'string', required: true, example: 'user123' },
+          class: { type: 'string', required: true, example: 'Fighter' },
+          race: { type: 'string', required: true, example: 'Human' },
+          level: { type: 'integer', required: true, example: 5 },
+          hitPoints: { type: 'integer', required: true, example: 50 },
+          armorClass: { type: 'integer', required: true, example: 16 },
+          strength: { type: 'integer', required: true, example: 18 },
+          dexterity: { type: 'integer', required: true, example: 14 },
+          constitution: { type: 'integer', required: true, example: 16 },
+          intelligence: { type: 'integer', required: true, example: 10 },
+          wisdom: { type: 'integer', required: true, example: 12 },
+          charisma: { type: 'integer', required: true, example: 8 },
+          background: { type: 'string', example: 'Noble' },
+          alignment: { type: 'string', example: 'Lawful Good' }
+        }
+       }
     }
     #swagger.responses[201] = {
-      description: 'Quest created successfully',
-      schema: { $ref: '#/definitions/Quest' }
+      description: 'Quest created successfully'
     }
     #swagger.responses[400] = {
       description: 'Invalid input data'
