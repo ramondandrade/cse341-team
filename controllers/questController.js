@@ -10,8 +10,7 @@ const getAllQuests = async (req, res) => {
       #swagger.responses[200] = {
         description: 'Quests retrieved successfully',
         schema: {
-          type: 'array',
-          items: { $ref: '#/definitions/Quest' }
+          type: 'array'
         }
       }
       #swagger.responses[500] = {
@@ -43,8 +42,7 @@ const getQuestById = async (req, res) => {
         type: 'string'
       }
       #swagger.responses[200] = {
-        description: 'Quest retrieved successfully',
-        schema: { $ref: '#/definitions/Quest' }
+        description: 'Quest retrieved successfully'
       }
       #swagger.responses[404] = {
         description: 'Quest not found'
@@ -250,12 +248,10 @@ const updateQuest = async (req, res) => {
       #swagger.parameters['quest'] = {
         in: 'body',
         description: 'Updated quest data',
-        required: true,
-        schema: { $ref: '#/definitions/QuestInput' }
+        required: true
       }
       #swagger.responses[200] = {
-        description: 'Quest updated successfully',
-        schema: { $ref: '#/definitions/Quest' }
+        description: 'Quest updated successfully'
       }
       #swagger.responses[400] = {
         description: 'Invalid input data'
