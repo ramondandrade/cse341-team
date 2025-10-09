@@ -4,7 +4,7 @@ const passport = require('passport');
 // Use routes
 router.use('/character', require('./characterRoutes'));
 router.use("/player", require("./userRoutes"));
-router.use("/quest", require("./questLogRoutes"));
+router.use("/quest", require("./questRoutes"));
 router.use("/", require("./swagger"));
 router.use('/auth', passport.authenticate('github')); 
 router.use('/logout', (req, res) => {
