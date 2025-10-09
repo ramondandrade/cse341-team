@@ -17,7 +17,7 @@ const getAllItems = async (req, res) => {
 const getItemsByCharacterId = async (req, res) => {
   //#swagger.tags=["Inventory"]
   try {
-    const id = new ObjectId(req.params.characterId);
+    const id = req.params.characterId;
     
     if (!id) {
       return res.status(400).json({ message: "Character ID is required" });
@@ -25,7 +25,7 @@ const getItemsByCharacterId = async (req, res) => {
 
     const result = await mongodb.getDatabase().db().collection("inventory").find({ characterId: id });
     result.toArray().then((items) => {
-      if (items.length === 0) {
+      if (items.length == 0) {
         return res.status(404).json({ message: "No items found for this character" });
       }
       res.setHeader("Content-Type", "application/json");
