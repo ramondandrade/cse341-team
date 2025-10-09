@@ -30,7 +30,6 @@ const getSingleUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   /* #swagger.tags=["Players"]
-  #swagger.description="Creating a player here is not recommended. If you want to create a player, please go to /auth/github"
   #swagger.parameters["body"] = {
     in: "body",
     '@schema': {
