@@ -9,8 +9,7 @@ router.get("/", itemController.getAllItems);
 router.get("/:id", itemController.getSingleItem);
 
 // GET /inventory/user/{characterId} - Get items by character ID
-router.get('/character/:characterId', itemController.getItemsByCharacterId
-);
+router.get('/character/:characterId', itemController.getItemsByCharacterId);
 
 // POST /inventory/ - Create a new item
 router.post("/", validation.saveItem, itemController.createItem);

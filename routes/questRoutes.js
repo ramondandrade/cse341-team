@@ -10,15 +10,6 @@ router.get('/', isAuthenticated,  questController.getAllQuests);
 // GET /quest/{id} - Get quest by ID
 router.get('/:id', isAuthenticated, questController.getQuestById);
 
-// GET /quest/difficulty/{difficulty} - Get quests by difficulty
-router.get('/difficulty/:difficulty', isAuthenticated, questController.getQuestsByDifficulty);
-
-// GET /quest/type/{type} - Get quests by type
-router.get('/type/:type', isAuthenticated, questController.getQuestsByType);
-
-// GET /quest/available/{level} - Get available quests for character level
-router.get('/available/:level', isAuthenticated, questController.getAvailableQuestsForLevel);
-
 // POST /quest/ - Create a new quest
 router.post('/', isAuthenticated, questValidation.saveQuest, questController.createQuest);
 

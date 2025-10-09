@@ -1,4 +1,3 @@
-const express = require('express');
 const routes = require('express').Router();
 const characterController = require('../controllers/characterController');
 const characterValidate = require('../middleware/characterValidate');
