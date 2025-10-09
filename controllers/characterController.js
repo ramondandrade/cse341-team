@@ -52,7 +52,7 @@ const getCharactersByUserId = async (req, res) => {
   //#swagger.tags=["Characters"]
 
   try {
-    const id  = req.params.id;
+    const id  = req.params.userId;
     
     if (!id) {
       return res.status(400).json({ message: 'User ID is required' });
