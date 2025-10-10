@@ -1,7 +1,6 @@
 const express = require("express");
 const router = require("../routes/itemRoutes");
 const { MongoClient } = require("mongodb");
-
 const app = express();
 app.use("/", router);
 
@@ -15,10 +14,10 @@ describe("inventory", () => {
       useUnifiedTopology: true,
     });
     db = await connection.db();
-    await db.collection("mock_inventory").deleteMany({});
   });
 
   afterAll(async() => {
+    await db.collection("mock_inventory").deleteMany({});
     await connection.close();
   });
 
@@ -61,6 +60,7 @@ describe("inventory", () => {
     expect(insertedItem2).toEqual(mockItem2);
   });
   
+  // getAllItems
   it("should return two docs from the collection", async () => {
     const items = await db.collection("mock_inventory").find();
 
@@ -90,6 +90,7 @@ describe("inventory", () => {
     expect(updatedItem).toEqual(mockItem);
   });
   
+  // getSingleItem
   it("should return a doc from the collection", async () => {
     const items = await db.collection("mock_inventory").find({_id: "some-items-id"});
 
@@ -98,6 +99,7 @@ describe("inventory", () => {
     });
   });
 
+  // getItemsByCharacterId
   it("should return two docs from the collection", async () => {
     const items = await db.collection("mock_inventory").find({characterId: "req.body.characterId"});
 

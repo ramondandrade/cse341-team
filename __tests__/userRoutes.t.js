@@ -1,7 +1,6 @@
 const express = require("express");
 const router = require("../routes/userRoutes");
 const { MongoClient } = require("mongodb");
-
 const app = express();
 app.use("/", router);
 
@@ -15,17 +14,17 @@ describe("players", () => {
       useUnifiedTopology: true,
     });
     db = await connection.db();
-    await db.collection("mock_players").deleteMany({});
   });
 
   afterAll(async() => {
+    await db.collection("mock_players").deleteMany({});
     await connection.close();
   });
 
   it("should insert two docs into the collection", async () => {
-    const players = db.collection("mock_players");
+    const users = db.collection("mock_players");
 
-    const mockPlayer = {
+    const mockUser = {
       _id: "some-players-id", 
       username: "req.body.userrrname",
       profileUrl: "req.body.profileUrl",
@@ -33,7 +32,7 @@ describe("players", () => {
       characters: "req.body.characters"
     };
 
-    const mockPlayer2 = {
+    const mockUser2 = {
       _id: "some-other-players-id", 
       username: "req.body.username",
       profileUrl: "req.body.profileUrl",
@@ -41,54 +40,56 @@ describe("players", () => {
       characters: "req.body.characters"
     };
 
-    await players.insertOne(mockPlayer);
-    await players.insertOne(mockPlayer2);
+    await users.insertOne(mockUser);
+    await users.insertOne(mockUser2);
 
-    const insertedplayer = await players.findOne({_id: "some-players-id"});
-    const insertedplayer2 = await players.findOne({_id: "some-other-players-id"});
+    const insertedUser = await users.findOne({_id: "some-players-id"});
+    const insertedUser2 = await users.findOne({_id: "some-other-players-id"});
 
-    expect(insertedplayer).toEqual(mockPlayer);
-    expect(insertedplayer2).toEqual(mockPlayer2);
+    expect(insertedUser).toEqual(mockUser);
+    expect(insertedUser2).toEqual(mockUser2);
   });
   
+  // getAllUsers
   it("should return two docs from the collection", async () => {
-    const players = await db.collection("mock_players").find();
+    const users = await db.collection("mock_players").find();
 
-    players.toArray().then((result) => {
+    users.toArray().then((result) => {
       expect(result.length).toBe(2);
     });
   });
 
   it("should update a doc in the collection", async () => {
-    const players = db.collection("mock_players");
+    const users = db.collection("mock_players");
 
-    const mockPlayer = {
+    const mockUser = {
       _id: "some-players-id", 
       username: "req.body.userrrnaaaame",
       profileUrl: "req.body.profileUrl",
       createdAt: "Date(timestamp)",
       characters: "req.body.characters"
     };
-    await players.replaceOne({ _id: mockPlayer._id }, mockPlayer);
+    await users.replaceOne({ _id: mockUser._id }, mockUser);
     
-    const updatedplayer = await players.findOne({_id: "some-players-id"});
-    expect(updatedplayer).toEqual(mockPlayer);
+    const updatedUser = await users.findOne({_id: "some-players-id"});
+    expect(updatedUser).toEqual(mockUser);
   });
   
+  // getSingleUser
   it("should return a doc from the collection", async () => {
-    const players = await db.collection("mock_players").find({_id: "some-players-id"});
+    const users = await db.collection("mock_players").find({_id: "some-players-id"});
 
-    players.toArray().then((result) => {
+    users.toArray().then((result) => {
       expect(result.length).toBe(1);
     });
   });
 
   it("should delete a doc from the collection", async () => {
-    const players = db.collection("mock_players");
+    const users = db.collection("mock_players");
 
-    await players.deleteMany({ _id: "some-players-id" });
+    await users.deleteMany({ _id: "some-players-id" });
     
-    const deletedplayer = await players.findOne({_id: "some-players-id"});
-    expect(deletedplayer).toEqual(null);
+    const deletedUser = await users.findOne({_id: "some-players-id"});
+    expect(deletedUser).toEqual(null);
   });
 });
