@@ -1,25 +1,24 @@
 const validator = require("../helpers/validate");
 
-const saveUser = (req, res, next) => {
-  const validationRule = {
+const validateUser = (req, res, next) => {
+
+  // Validation middleware for user data
+  const rules = {
     username: "required|string",
     profileUrl: "required|string",
     createdAt: "string",
     characters: "required|array"
   };
-  validator(req.body, validationRule, {}, (err, status) => {
-    if (!status) {
-      res.status(412).send({
-        success: false,
-        message: "Validation failed",
-        data: err
-      });
-    } else {
-      next();
+
+  validator(req.body, rules, {}, (err, isValid) => {
+    if (err) {
+      return res.status(400).json({ errors: err });
     }
+    if (!isValid) {
+      return res.status(400).json({ message: "Validation failed" });
+    }
+    next();
   });
 };
 
-module.exports = {
-  saveUser
-};
+module.exports = { validateUser };

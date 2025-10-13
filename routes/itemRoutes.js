@@ -1,24 +1,23 @@
-const router = require("express").Router();
+const routes = require("express").Router();
 const itemController = require("../controllers/itemController");
-const validation = require("../middleware/itemValidate");
-const isAuthenticated = require("../middleware/authenticate");
+const itemValidation = require("../middleware/itemValidate");
 
 // GET /inventory/ - Get all items
-router.get("/", isAuthenticated, itemController.getAllItems);
+routes.get("/", itemController.getAllItems);
 
 // GET /inventory/{id} - Get item by ID
-router.get("/:id", isAuthenticated, itemController.getSingleItem);
+routes.get("/:id", itemController.getSingleItem);
 
 // GET /inventory/user/{characterId} - Get items by character ID
-router.get('/character/:characterId', isAuthenticated, itemController.getItemsByCharacterId);
+routes.get('/character/:characterId', itemController.getItemsByCharacterId);
 
 // POST /inventory/ - Create a new item
-router.post("/", isAuthenticated, validation.saveItem, itemController.createItem);
+routes.post("/", itemValidation.validateItem, itemController.createItem);
 
 // PUT /inventory/{id} - Update item by ID
-router.put("/:id", isAuthenticated, validation.saveItem, itemController.updateItem);
+routes.put("/:id", itemValidation.validateItem, itemController.updateItem);
 
 // DELETE /inventory/{id} - Delete item by ID
-router.delete("/:id", isAuthenticated, itemController.deleteItem);
+routes.delete("/:id", itemController.deleteItem);
 
-module.exports = router;
+module.exports = routes;

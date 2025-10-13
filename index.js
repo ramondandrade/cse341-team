@@ -9,7 +9,6 @@ const PORT = process.env.PORT || 8080;
 const mongodb = require("./data/db");
 const db = require('./models');
 
-
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -24,7 +23,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (user, done) => {
-    done(null, user);
+  done(null, user);
 });
 
 passport.use(new GitHubStrategy({
@@ -33,7 +32,7 @@ passport.use(new GitHubStrategy({
     callbackURL: process.env.GITHUB_CALLBACK_URL
   },
   async (accessToken, refreshToken, profile, done) => {
-      return done(null, profile);
+    return done(null, profile);
   }
 ));
 

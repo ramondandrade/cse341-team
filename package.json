@@ -1,5 +1,5 @@
 {
-  "name": "temple-api",
+  "name": "rr-character-manager-api",
   "version": "1.0.0",
   "description": "RR-Character-Manager - CSE 341 Final Project",
   "main": "index.js",

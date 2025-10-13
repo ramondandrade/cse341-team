@@ -21,6 +21,7 @@ describe("inventory", () => {
     await connection.close();
   });
 
+  // createItem
   it("should insert two docs into the collection", async () => {
     const items = db.collection("mock_inventory");
 
@@ -69,6 +70,7 @@ describe("inventory", () => {
     });
   });
 
+  // updateItem
   it("should update a doc in the collection", async () => {
     const items = db.collection("mock_inventory");
 
@@ -108,6 +110,7 @@ describe("inventory", () => {
     });
   });
 
+  // deleteItem
   it("should delete a doc from the collection", async () => {
     const items = db.collection("mock_inventory");
 

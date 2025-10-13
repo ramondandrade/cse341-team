@@ -21,6 +21,7 @@ describe("players", () => {
     await connection.close();
   });
 
+  // createUser
   it("should insert two docs into the collection", async () => {
     const users = db.collection("mock_players");
 
@@ -59,6 +60,7 @@ describe("players", () => {
     });
   });
 
+  // updateUser
   it("should update a doc in the collection", async () => {
     const users = db.collection("mock_players");
 
@@ -84,6 +86,7 @@ describe("players", () => {
     });
   });
 
+  // deleteUser
   it("should delete a doc from the collection", async () => {
     const users = db.collection("mock_players");
 

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
+const isAuthenticated = require("../middleware/authenticate");
 
 router.get("/", (req, res) => {
   //#swagger.tags=["Hello World"]
@@ -11,10 +12,10 @@ router.get("/", (req, res) => {
 });
 
 // Use routes
-router.use('/character', require('./characterRoutes'));
+router.use('/character', isAuthenticated, require('./characterRoutes'));
 router.use("/player", require("./userRoutes"));
-router.use("/quest", require("./questRoutes"));
-router.use("/inventory", require("./itemRoutes"));
+router.use('/quest', isAuthenticated, require('./questRoutes'));
+router.use("/inventory", isAuthenticated, require("./itemRoutes"));
 router.use("/", require("./swagger"));
 router.use('/auth', passport.authenticate('github')); 
 router.use('/logout', (req, res) => {

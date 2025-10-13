@@ -1,8 +1,8 @@
 const validator = require('../helpers/validate');
 
+const validateCharacter = (req, res, next) => {
 
-const validatePost = (req, res, next) => {
-
+  // Validation middleware for character data
   const rules = {
     name: 'required|string|max:100',
     userId: 'required|string',
@@ -32,4 +32,4 @@ const validatePost = (req, res, next) => {
   });
 };
 
-module.exports = { validatePost };
+module.exports = { validateCharacter };

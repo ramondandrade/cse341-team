@@ -1,7 +1,9 @@
 const validator = require("../helpers/validate");
 
-const saveItem = (req, res, next) => {
-  const validationRule = {
+const validateItem = (req, res, next) => {
+
+  // Validation middleware for item data
+  const rules = {
     name: "required|string|max:100",
     type: "required|string",
     rarity: "required|string",
@@ -17,19 +19,16 @@ const saveItem = (req, res, next) => {
     },
     levelRequirement: "required|integer|min:1|max:20"
   };
-  validator(req.body, validationRule, {}, (err, status) => {
-    if (!status) {
-      res.status(412).send({
-        success: false,
-        message: "Validation failed",
-        data: err
-      });
-    } else {
-      next();
+
+  validator(req.body, rules, {}, (err, isValid) => {
+    if (err) {
+      return res.status(400).json({ errors: err });
     }
+    if (!isValid) {
+      return res.status(400).json({ message: "Validation failed" });
+    }
+    next();
   });
 };
 
-module.exports = {
-  saveItem
-};
+module.exports = { validateItem };
