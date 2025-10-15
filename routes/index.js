@@ -5,7 +5,7 @@ const isAuthenticated = require("../middleware/authenticate");
 router.get("/", (req, res) => {
   //#swagger.tags=["Hello World"]
   try {
-    res.send("<p>Hello World</p>");
+    res.send('RR-Character-Manager - CSE 341 Final Project. ' + (req.session.user ? `Logged in as ${req.session.user.username}` : 'Not logged in: <a href="/auth">Login with GitHub</a>'));
   } catch (error) {
     console.error(error);
   }
