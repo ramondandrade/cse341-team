@@ -1,7 +1,6 @@
 const routes = require("express").Router();
 const userController = require("../controllers/userController");
 const userValidation = require("../middleware/userValidate");
-const isAuthenticated = require("../middleware/authenticate");
 
 // GET /player/ - Get all users
 routes.get("/", userController.getAllUsers);
@@ -10,12 +9,12 @@ routes.get("/", userController.getAllUsers);
 routes.get("/:id", userController.getSingleUser);
 
 // POST /player/ - Create a new user
-routes.post("/", isAuthenticated, userValidation.validateUser, userController.createUser);
+routes.post("/", userValidation.validateUser, userController.createUser);
 
 // PUT /player/{id} - Update user by ID
-routes.put("/:id", isAuthenticated, userValidation.validateUser, userController.updateUser);
+routes.put("/:id", userValidation.validateUser, userController.updateUser);
 
 // DELETE /player/{id} - Delete user by ID
-routes.delete("/:id", isAuthenticated, userController.deleteUser);
+routes.delete("/:id", userController.deleteUser);
 
 module.exports = routes;

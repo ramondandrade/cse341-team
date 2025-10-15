@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 
 // Use routes
 router.use('/character', isAuthenticated, require('./characterRoutes'));
-router.use("/player", require("./userRoutes"));
+router.use("/player", isAuthenticated, require("./userRoutes"));
 router.use('/quest', isAuthenticated, require('./questRoutes'));
 router.use("/inventory", isAuthenticated, require("./itemRoutes"));
 router.use("/", require("./swagger"));
